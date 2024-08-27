@@ -2,7 +2,7 @@
 @section('title', 'Itemler')
 @section('content')
 
-    @include('modules.items.index.modals.modal_item_create_update')
+    @include('modules.transactions.index.modals.modal_item_transaction_create_update')
 
     <div class="row">
         <div class="col-md-12">
@@ -14,11 +14,11 @@
 
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title pull-left">Item Listesi</h3>
+                    <h3 class="box-title pull-left">{{"Item Adı : ". $item->name}}</h3>
                     <button class="btn btn-primary btn-sm pull-right"
                             style="margin-left:5px"
                             data-toggle="modal"
-                            data-target="#itemModal">Item Oluştur
+                            data-target="#itemTransactionModal">Hareket Oluştur
                     </button>
                 </div>
                 <div class="box-body with-border">
@@ -26,31 +26,27 @@
                            id="employeeTable">
                         <thead>
                         <tr class="border-bottom-primary">
-                            <th scope="col">Item Adı</th>
-                            <th scope="col">Eldeki Miktar</th>
-                            <th scope="col">Son Alış Fiyatı</th>
-                            <th scope="col">Son Satış Fiyatı</th>
-                            <th scope="col">Oluşturan</th>
+                            <th scope="col">Fiyat Tipi</th>
+                            <th scope="col">Fiyat</th>
+                            <th scope="col">Tarih</th>
+                            <th scope="col">Fiyatı Giren</th>
                             <th scope="col">İşlemler</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($items as $item)
-                            <tr data-id="{{ $item->id }}">
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->quantity ?? "0" }}</td>
-                                <td>{{ $item->last_purchase_price ?? "0.00" }}</td>
-                                <td>{{ $item->last_sales_price ?? "0.00" }}</td>
-                                <td>{{ $item->user->name }}</td>
+                        @foreach($itemTransactions as $itemTransaction)
+                            <tr data-id="{{ $itemTransaction->id }}">
+                                <td>{{ $itemTransaction->type }}</td>
+                                <td>{{ $itemTransaction->quantity ?? "0" }}</td>
+                                <td>{{ $itemTransaction->last_purchase_price ?? "0.00" }}</td>
+                                <td>{{ $itemTransaction->last_sales_price ?? "0.00" }}</td>
                                 <td>
-                                    <a class="btn btn-primary"
-                                       href="{{route('item.transactions', $item->id)}}">Hareketler
-                                    </a>
+                                    <a class="btn btn-primary" href="{{route('item.transactions')}}">Fiyat</a>
                                     <a class="btn btn-warning"
-                                       onclick="getItem({{ $item->id }})">Düzenle
+                                            onclick="getItem({{ $itemTransaction->id }})">Düzenle
                                     </a>
                                     <a class="btn btn-danger"
-                                       onclick="deleteItem({{$item->id}})">Sil
+                                            onclick="deleteItem({{$itemTransaction->id}})">Sil
                                     </a>
 
                                 </td>
@@ -67,9 +63,9 @@
 @endsection
 
 @section('customStyle')
-    @include('modules.items.index.components.style')
+    @include('modules.transactions.index.components.style')
 @endsection
 
 @section('customScript')
-    @include('modules.items.index.components.script')
+    @include('modules.transactions.index.components.script')
 @endsection

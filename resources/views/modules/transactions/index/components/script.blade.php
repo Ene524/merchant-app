@@ -1,10 +1,11 @@
 <script src="{{asset('assets/bower_components/sweet-alert/sweetalert.min.js')}}"></script>
 <script>
-    $('#saveItem').on('click', function () {
+    $('#saveItemTransaction').on('click', function () {
         var name = $('#name').val();
         var description = $('#description').val();
         var note = $('#note').val();
         var id = $('#id').val();
+
 
         var data = {
             id: id,
@@ -23,13 +24,6 @@
             },
             error: function (response) {
                 console.log(response);
-                var errors = response.responseJSON.errors;
-                var errorHtml = '<div class="alert alert-danger"><ul>';
-                $.each(errors, function (key, value) {
-                    errorHtml += '<li>' + value + '</li>';
-                });
-                errorHtml += '</ul></div>';
-                $('#error-container').html(errorHtml);
             }
         });
     });
@@ -93,5 +87,6 @@
             }
         });
     }
+
 
 </script>
