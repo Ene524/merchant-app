@@ -16,7 +16,7 @@
             </li>
 
             <li class="dropdown user user-menu">
-                <a href="#" >
+                <a href="{{route('user.logout')}}" >
                     <span>Çıkış Yap</span>
                 </a>
             </li>

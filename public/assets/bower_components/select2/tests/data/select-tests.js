@@ -491,8 +491,8 @@ test('select option construction accepts id="" (empty string) value',
   );
 });
 
-test('user-defined types are normalized properly', function (assert) {
-  var $select = $('#qunit-fixture .user-defined'),
+test('users-defined types are normalized properly', function (assert) {
+  var $select = $('#qunit-fixture .users-defined'),
 
   UserDefinedType = function (id, text) {
     var self = this;
