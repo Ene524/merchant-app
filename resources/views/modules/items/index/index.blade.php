@@ -26,12 +26,13 @@
                            id="employeeTable">
                         <thead>
                         <tr class="border-bottom-primary">
-                            <th scope="col">Item Adı</th>
-                            <th scope="col">Eldeki Miktar</th>
-                            <th scope="col">Son Alış Fiyatı</th>
-                            <th scope="col">Son Satış Fiyatı</th>
-                            <th scope="col">Oluşturan</th>
-                            <th scope="col">İşlemler</th>
+                            <th style="width:14.2%">Item Adı</th>
+                            <th style="width:14.2%">Eldeki Miktar</th>
+                            <th style="width:14.2%">Son Alış Fiyatı</th>
+                            <th style="width:14.2%">Son Satış Fiyatı</th>
+                            <th style="width:14.2%">Son işlemden sonra kâr/zarar</th>
+                            <th style="width:14.2%">Oluşturan</th>
+                            <th style="width:14.2%">İşlemler</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -39,9 +40,10 @@
                             <tr data-id="{{ $item->id }}">
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->quantity ?? "0" }}</td>
-                                <td>{{ $item->last_purchase_price ?? "0.00" }}</td>
-                                <td>{{ $item->last_sales_price ?? "0.00" }}</td>
-                                <td>{{ $item->user->name }}</td>
+                                <td>{{ $item->last_purchase_price  }}</td>
+                                <td>{{ $item->last_sales_price }}</td>
+                                <td>{{ $item->profit  }}</td>
+                                <td>{{ $item->user_name }}</td>
                                 <td>
                                     <a class="btn btn-primary"
                                        href="{{route('item.transactions', $item->id)}}">Hareketler

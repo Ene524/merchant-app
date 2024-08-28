@@ -11,3 +11,5 @@ Route::get('/edit', [ItemController::class, 'edit'])->name('item.edit');
 Route::delete('/delete', [ItemController::class, 'delete'])->name('item.delete');
 
 Route::get('/items/transactions/{id}', [ItemController::class, 'itemTransactions'])->name('item.transactions');
+Route::post('/items/transactions/createOrUpdate', [ItemController::class, 'transactionStore'])->name('item.transactionStore');
+Route::get('/editTransaction', [ItemController::class, 'editTransaction'])->name('transaction.edit');

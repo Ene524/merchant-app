@@ -4,15 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GetById;
 use App\Http\Requests\ItemCreateOrUpdateRequest;
+use App\Http\Requests\ItemTransactionCreateorUpdateRequest;
 use App\Models\Item;
 use App\Models\ItemTransaction;
+use DB;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
     public function index()
     {
-        $items = Item::with('user')->get();
+        //$items = Item::with('user')->get();
+        $items=DB::select('SELECT
+        items.id,
+        items.name,
+        COALESCE((SELECT SUM(quantity) FROM item_transactions WHERE type=1 AND item_id=items.id),0)-
+        COALESCE((SELECT SUM(quantity) FROM item_transactions WHERE type=2 AND item_id=items.id),0) quantity,
+        (SELECT price FROM item_transactions WHERE type=1 AND item_id=items.id ORDER BY created_at DESC LIMIT 1) last_purchase_price,
+        (SELECT price FROM item_transactions WHERE type=2 AND item_id=items.id ORDER BY created_at DESC LIMIT 1) last_sales_price,
+        (SELECT price FROM item_transactions WHERE type = 2 AND item_id = items.id ORDER BY created_at DESC LIMIT 1) -
+        (SELECT price FROM item_transactions WHERE type = 1 AND item_id = items.id ORDER BY created_at DESC LIMIT 1) AS profit,  -- Karlılık hesaplaması
+        users.name user_name
+        FROM items LEFT JOIN users ON items.user_id=users.id');
         return view('modules.items.index.index', compact('items'));
     }
 
@@ -53,5 +66,34 @@ class ItemController extends Controller
         $item = Item::find($id);
         $itemTransactions = ItemTransaction::with('user')->where('item_id', $id)->get();
         return view('modules.transactions.index.index', compact('item', 'itemTransactions'));
+    }
+
+
+    public function transactionStore(ItemTransactionCreateorUpdateRequest $request)
+    {
+        //dd($request->all());
+        if ($request->id) {
+            $itemTransaction = ItemTransaction::find($request->id);
+            $itemTransaction->item_id = $request->item_id;
+            $itemTransaction->type = $request->type;
+            $itemTransaction->price = $request->price;
+            $itemTransaction->quantity = $request->quantity;
+            $itemTransaction->user_id = 1;
+            $itemTransaction->save();
+            return response()->json(['success' => 'ItemTransaction updated successfully.']);
+        } else {
+            $itemTransaction = new ItemTransaction();
+            $itemTransaction->item_id = $request->item_id;
+            $itemTransaction->type = $request->type;
+            $itemTransaction->price = $request->price;
+            $itemTransaction->quantity = $request->quantity;
+            $itemTransaction->user_id = 1;
+            $itemTransaction->save();
+            return response()->json(['success' => 'ItemTransaction created successfully.']);
+        }
+    }
+    public function editTransaction(Request $request)
+    {
+        return ItemTransaction::find($request->id);
     }
 }

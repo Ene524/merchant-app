@@ -10,9 +10,10 @@
                         aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Item Hareketi Gir</h4>
+                <h4 class="modal-title">Item Hareketi Gir - {{$item->name}}</h4>
             </div>
             <div class="modal-body">
+                <div id="error-transaction-container"></div>
                 <form class="form-horizontal"
                       method="POST">
                     <div class="box-body">
@@ -53,7 +54,6 @@
                         </div>
 
 
-
                         <div class="modal-footer">
                             <button class="btn btn-danger"
                                     type="button"
@@ -69,7 +69,5 @@
             </div>
 
         </div>
-
     </div>
-
 </div>

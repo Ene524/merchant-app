@@ -14,7 +14,11 @@
 
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title pull-left">{{"Item Adı : ". $item->name}}</h3>
+                    <h3 class="box-title pull-left">{{ $item->name . " - Hareketler"}}</h3>
+                    <input type="hidden"
+                           name="item_id"
+                           id="item_id"
+                           value="{{$item->id}}"/>
                     <button class="btn btn-primary btn-sm pull-right"
                             style="margin-left:5px"
                             data-toggle="modal"
@@ -26,27 +30,29 @@
                            id="employeeTable">
                         <thead>
                         <tr class="border-bottom-primary">
-                            <th scope="col">Fiyat Tipi</th>
-                            <th scope="col">Fiyat</th>
-                            <th scope="col">Tarih</th>
-                            <th scope="col">Fiyatı Giren</th>
-                            <th scope="col">İşlemler</th>
+                            <th style="width:16.6%">Fiyat Tipi</th>
+                            <th style="width:16.6%">Miktar</th>
+                            <th style="width:16.6%">Fiyat</th>
+                            <th style="width:16.6%">Tarih</th>
+                            <th style="width:16.6%">Fiyatı Giren</th>
+                            <th style="width:16.6%">İşlemler</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($itemTransactions as $itemTransaction)
                             <tr data-id="{{ $itemTransaction->id }}">
-                                <td>{{ $itemTransaction->type }}</td>
-                                <td>{{ $itemTransaction->quantity ?? "0" }}</td>
-                                <td>{{ $itemTransaction->last_purchase_price ?? "0.00" }}</td>
-                                <td>{{ $itemTransaction->last_sales_price ?? "0.00" }}</td>
+
+                                <td>{{ $itemTransaction->type==1 ? 'Alış':'Satış' }}</td>
+                                <td>{{ $itemTransaction->quantity }}</td>
+                                <td>{{ $itemTransaction->price }}</td>
+                                <td>{{ $itemTransaction->created_at }}</td>
+                                <td>{{ $itemTransaction->user->name }}</td>
                                 <td>
-                                    <a class="btn btn-primary" href="{{route('item.transactions')}}">Fiyat</a>
                                     <a class="btn btn-warning"
-                                            onclick="getItem({{ $itemTransaction->id }})">Düzenle
+                                       onclick="getItemTransaction({{ $itemTransaction->id }})">Düzenle
                                     </a>
                                     <a class="btn btn-danger"
-                                            onclick="deleteItem({{$itemTransaction->id}})">Sil
+                                       onclick="deleteItemTransaction({{$itemTransaction->id}})">Sil
                                     </a>
 
                                 </td>

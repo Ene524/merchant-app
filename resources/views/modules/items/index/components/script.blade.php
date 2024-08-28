@@ -1,5 +1,13 @@
 <script src="{{asset('assets/bower_components/sweet-alert/sweetalert.min.js')}}"></script>
 <script>
+    $('body').on('keypress', function (e) {
+        var key = (e.keyCode || e.which);
+        if (key == 13 || key == 3) {
+            $('#saveItem').click();
+        }
+    });</script>
+
+<script>
     $('#saveItem').on('click', function () {
         var name = $('#name').val();
         var description = $('#description').val();

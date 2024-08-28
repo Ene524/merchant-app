@@ -1,48 +1,67 @@
 <script src="{{asset('assets/bower_components/sweet-alert/sweetalert.min.js')}}"></script>
 <script>
+    $('body').on('keypress',function(e){
+        var key = (e.keyCode || e.which);
+        if(key == 13 || key == 3){
+            $('#saveItemTransaction').click();
+        }
+    });
+</script>
+<script>
     $('#saveItemTransaction').on('click', function () {
-        var name = $('#name').val();
-        var description = $('#description').val();
-        var note = $('#note').val();
         var id = $('#id').val();
+        var item_id = $('#item_id').val();
+        var type = $('#type').val();
+        var price = $('#price').val();
+        var quantity = $('#quantity').val();
 
 
         var data = {
             id: id,
-            name: name,
-            description: description,
-            note: note,
+            item_id: item_id,
+            type: type,
+            price: price,
+            quantity: quantity,
             _token: '{{ csrf_token() }}'
         };
 
         $.ajax({
             type: 'POST',
-            url: '{{ route('item.store') }}',
+            url: '{{ route('item.transactionStore') }}',
             data: data,
             success: function (response) {
                 window.location.reload();
             },
             error: function (response) {
                 console.log(response);
+                var errors = response.responseJSON.errors;
+                var errorHtml = '<div class="alert alert-danger"><ul>';
+                $.each(errors, function (key, value) {
+                    errorHtml += '<li>' + value + '</li>';
+                });
+                errorHtml += '</ul></div>';
+                $('#error-transaction-container').html(errorHtml);
             }
         });
     });
 
-    function getItem(id) {
-        $('#name').val('');
-        $('#description').val('');
-        $('#note').val('');
+    function getItemTransaction(id) {
         $('#id').val('');
+        $('#item_id').val('');
+        $('#type').val('');
+        $('#price').val('');
+        $('#quantity').val('');
 
         $.ajax({
             type: 'GET',
-            url: '{{ route('item.edit') }}',
+            url: '{{ route('transaction.edit') }}',
             data: {id: id},
             success: function (response) {
-                $('#itemModal').modal('show');
-                $('#name').val(response.name);
-                $('#description').val(response.description);
-                $('#note').val(response.note);
+                $('#itemTransactionModal').modal('show');
+                $('#item_id').val(response.item_id);
+                $('#type').val(response.type);
+                $('#price').val(response.price);
+                $('#quantity').val(response.quantity);
                 $('#id').val(response.id);
             },
             error: function (response) {
