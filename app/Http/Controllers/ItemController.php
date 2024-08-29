@@ -36,7 +36,7 @@ class ItemController extends Controller
             $item->name = $request->name;
             $item->description = $request->description;
             $item->note = $request->note;
-            $item->user_id = 1;
+            $item->user_id = auth()->user()->id;
             $item->save();
             return response()->json(['success' => 'Item updated successfully.']);
         } else {
@@ -44,7 +44,7 @@ class ItemController extends Controller
             $item->name = $request->name;
             $item->description = $request->description;
             $item->note = $request->note;
-            $item->user_id = 1;
+            $item->user_id = auth()->user()->id;
             $item->save();
             return response()->json(['success' => 'Item created successfully.']);
         }
@@ -78,7 +78,7 @@ class ItemController extends Controller
             $itemTransaction->type = $request->type;
             $itemTransaction->price = $request->price;
             $itemTransaction->quantity = $request->quantity;
-            $itemTransaction->user_id = 1;
+            $itemTransaction->user_id = auth()->user()->id;;
             $itemTransaction->save();
             return response()->json(['success' => 'ItemTransaction updated successfully.']);
         } else {
@@ -87,7 +87,7 @@ class ItemController extends Controller
             $itemTransaction->type = $request->type;
             $itemTransaction->price = $request->price;
             $itemTransaction->quantity = $request->quantity;
-            $itemTransaction->user_id = 1;
+            $itemTransaction->user_id = auth()->user()->id;
             $itemTransaction->save();
             return response()->json(['success' => 'ItemTransaction created successfully.']);
         }
