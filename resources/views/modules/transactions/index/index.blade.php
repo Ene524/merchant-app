@@ -34,7 +34,7 @@
                             <th style="width:16.6%">Miktar</th>
                             <th style="width:16.6%">Fiyat</th>
                             <th style="width:16.6%">Tarih</th>
-                            <th style="width:16.6%">Fiyatı Giren</th>
+                            <th style="width:16.6%">İşlem Yapan</th>
                             <th style="width:16.6%">İşlemler</th>
                         </tr>
                         </thead>

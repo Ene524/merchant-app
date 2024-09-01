@@ -64,7 +64,7 @@ class ItemController extends Controller
     public function itemTransactions($id)
     {
         $item = Item::find($id);
-        $itemTransactions = ItemTransaction::with('users')->where('item_id', $id)->get();
+        $itemTransactions = ItemTransaction::with('user')->where('item_id', $id)->get();
         return view('modules.transactions.index.index', compact('item', 'itemTransactions'));
     }
 

@@ -49,10 +49,14 @@
                                 </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Sunucu
+                            <li><a href="{{route('server.create')}}">
+                                    <i class="fa fa-circle-o"></i>
+                                    Sunucu
                                     Ekle</a>
                             </li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Sunucu
+                            <li><a href="{{route('server.index')}}">
+                                    <i class="fa fa-circle-o"></i>
+                                    Sunucu
                                     Listesi</a>
                             </li>
                         </ul>

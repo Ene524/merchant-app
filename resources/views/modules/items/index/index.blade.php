@@ -40,9 +40,9 @@
                             <tr data-id="{{ $item->id }}">
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->quantity ?? "0" }}</td>
-                                <td>{{ $item->last_purchase_price  }}</td>
-                                <td>{{ $item->last_sales_price }}</td>
-                                <td>{{ $item->profit  }}</td>
+                                <td>{{ $item->last_purchase_price ?? "Bulunamadı"  }}</td>
+                                <td>{{ $item->last_sales_price ?? "Bulunamadı" }}</td>
+                                <td>{{ $item->profit ?? "Bulunamadı"  }}</td>
                                 <td>{{ $item->user_name }}</td>
                                 <td>
                                     <a class="btn btn-primary"

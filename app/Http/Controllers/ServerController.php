@@ -2,58 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ServerRequest;
+use App\Models\Server;
 use Illuminate\Http\Request;
 
 class ServerController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        return view("modules.users.index.index", compact("users"));
+        $servers = Server::all();
+        return view("modules.servers.index.index", compact("servers"));
     }
 
     public function create()
     {
-        return view("modules.users.create-update.index");
+        return view("modules.servers.create-update.index");
     }
 
-    public function store(UserRequest $request)
+    public function store(ServerRequest $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->email_verified_at = now();
-        $user->save();
+        $server = new Server();
+        $server->name = $request->name;
+        $server->email = $request->email;
+        $server->password = Hash::make($request->password);
+        $server->email_verified_at = now();
+        $server->save();
 
-        return redirect()->route('user.index')->with('success', 'Kullanıcı başarıyla oluşturuldu');
+        return redirect()->route('server.index')->with('success', 'Kullanıcı başarıyla oluşturuldu');
     }
 
     public function edit($id)
     {
-        $user = User::findOrfail($id);
-        return view('modules.user.create-update.index', compact('user'));
+        $server = Server::findOrfail($id);
+        return view('modules.serves.create-update.index', compact('server'));
     }
 
-    public function update(UserRequest $request, $id)
+    public function update(ServerRequest $request, $id)
     {
-        $user = User::findOrfail($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->email_verified_at = now();
-        $user->save();
-        $user->syncRoles($request->role);
-        return redirect()->route('user.index')->with('success', 'Kullanıcı başarıyla güncellendi');
+        $server = Server::findOrfail($id);
+        $server->name = $request->name;
+        $server->email = $request->email;
+        $server->password = Hash::make($request->password);
+        $server->email_verified_at = now();
+        $server->save();
+        $server->syncRoles($request->role);
+        return redirect()->route('server.index')->with('success', 'Kullanıcı başarıyla güncellendi');
     }
 
     public function delete(Request $request)
     {
         $request->validate([
-            'userID' => 'required|exists:users,id',
+            'serverID' => 'required|exists:server,id',
         ]);
-        $user = User::find($request->userID);
-        $user->delete();
+        $server = Server::find($request->serverID);
+        $server->delete();
         return response()->json(['status' => 'success']);
     }
 }
