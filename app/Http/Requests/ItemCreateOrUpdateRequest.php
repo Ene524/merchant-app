@@ -23,6 +23,7 @@ class ItemCreateOrUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            'server_id' => 'required',
         ];
     }
 

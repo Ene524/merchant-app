@@ -20,5 +20,17 @@ class Item extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function server()
+    {
+        return $this->belongsTo(Server::class);
+    }
+
+    public function scopeServer($query, $server_id)
+    {
+        if ($server_id != null) {
+            return $query->where("server_id", $server_id);
+        }
+    }
+
 
 }

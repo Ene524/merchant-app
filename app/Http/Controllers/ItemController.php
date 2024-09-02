@@ -7,6 +7,7 @@ use App\Http\Requests\ItemCreateOrUpdateRequest;
 use App\Http\Requests\ItemTransactionCreateorUpdateRequest;
 use App\Models\Item;
 use App\Models\ItemTransaction;
+use App\Models\Server;
 use DB;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class ItemController extends Controller
 {
     public function index()
     {
-        //$items = Item::with('users')->get();
+        $servers = Server::all();
         $items=DB::select('SELECT
         items.id,
         items.name,
@@ -23,10 +24,13 @@ class ItemController extends Controller
         (SELECT price FROM item_transactions WHERE type=1 AND item_id=items.id ORDER BY created_at DESC LIMIT 1) last_purchase_price,
         (SELECT price FROM item_transactions WHERE type=2 AND item_id=items.id ORDER BY created_at DESC LIMIT 1) last_sales_price,
         (SELECT price FROM item_transactions WHERE type = 2 AND item_id = items.id ORDER BY created_at DESC LIMIT 1) -
-        (SELECT price FROM item_transactions WHERE type = 1 AND item_id = items.id ORDER BY created_at DESC LIMIT 1) AS profit,  -- Karlılık hesaplaması
+        (SELECT price FROM item_transactions WHERE type = 1 AND item_id = items.id ORDER BY created_at DESC LIMIT 1) AS profit,
+        servers.name server_name,
         users.name user_name
-        FROM items LEFT JOIN users ON items.user_id=users.id');
-        return view('modules.items.index.index', compact('items'));
+        FROM items
+        LEFT JOIN users ON items.user_id=users.id
+        LEFT JOIN servers ON items.server_id=servers.id');
+        return view('modules.items.index.index', compact('items', 'servers'));
     }
 
     public function store(ItemCreateOrUpdateRequest $request)
@@ -37,6 +41,7 @@ class ItemController extends Controller
             $item->description = $request->description;
             $item->note = $request->note;
             $item->user_id = auth()->user()->id;
+            $item->server_id = $request->server_id;
             $item->save();
             return response()->json(['success' => 'Item updated successfully.']);
         } else {
@@ -45,6 +50,7 @@ class ItemController extends Controller
             $item->description = $request->description;
             $item->note = $request->note;
             $item->user_id = auth()->user()->id;
+            $item->server_id = $request->server_id;
             $item->save();
             return response()->json(['success' => 'Item created successfully.']);
         }

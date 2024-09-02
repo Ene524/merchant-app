@@ -12,6 +12,7 @@
         var name = $('#name').val();
         var description = $('#description').val();
         var note = $('#note').val();
+        var server_id = $('#server_id').val();
         var id = $('#id').val();
 
         var data = {
@@ -19,6 +20,7 @@
             name: name,
             description: description,
             note: note,
+            server_id: server_id,
             _token: '{{ csrf_token() }}'
         };
 
@@ -46,6 +48,7 @@
         $('#name').val('');
         $('#description').val('');
         $('#note').val('');
+        $('#server_id').val('');
         $('#id').val('');
 
         $.ajax({
@@ -57,6 +60,7 @@
                 $('#name').val(response.name);
                 $('#description').val(response.description);
                 $('#note').val(response.note);
+                $('#server_id').val(response.server_id);
                 $('#id').val(response.id);
             },
             error: function (response) {

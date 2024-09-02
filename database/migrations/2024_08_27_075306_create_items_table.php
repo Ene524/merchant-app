@@ -17,12 +17,12 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('note')->nullable();
             $table->unsignedBigInteger('user_id');
-            //$table->unsignedBigInteger('server_id');
+            $table->unsignedBigInteger('server_id');
             $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            //$table->foreign('server_id')->references('id')->on('servers');
+            $table->foreign('server_id')->references('id')->on('servers');
         });
     }
 

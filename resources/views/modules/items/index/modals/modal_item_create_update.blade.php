@@ -17,7 +17,6 @@
                 <div id="error-container"></div>
 
 
-
                 <form class="form-horizontal"
                       method="POST">
                     <div class="box-body">
@@ -52,6 +51,20 @@
                                        type="text"
                                        name="note"
                                        id="note"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Server</label>
+                            <div class="col-sm-10">
+                                <select class="form-control"
+                                        name="server_id"
+                                        id="server_id">
+                                    <option value="">Seçiniz</option>
+                                    @foreach($servers as $server)
+                                        <option value="{{ $server->id }}">{{ $server->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

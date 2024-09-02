@@ -26,13 +26,14 @@
                            id="employeeTable">
                         <thead>
                         <tr class="border-bottom-primary">
-                            <th style="width:14.2%">Item Adı</th>
-                            <th style="width:14.2%">Eldeki Miktar</th>
-                            <th style="width:14.2%">Son Alış Fiyatı</th>
-                            <th style="width:14.2%">Son Satış Fiyatı</th>
-                            <th style="width:14.2%">Son işlemden sonra kâr/zarar</th>
-                            <th style="width:14.2%">Oluşturan</th>
-                            <th style="width:14.2%">İşlemler</th>
+                            <th style="width:12.5%">Item Adı</th>
+                            <th style="width:12.5%">Eldeki Miktar</th>
+                            <th style="width:12.5%">Son Alış Fiyatı</th>
+                            <th style="width:12.5%">Son Satış Fiyatı</th>
+                            <th style="width:12.5%">Son işlemden sonra kâr/zarar</th>
+                            <th style="width:12.5%">Server</th>
+                            <th style="width:12.5%">Oluşturan</th>
+                            <th style="width:12.5%">İşlemler</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -43,15 +44,16 @@
                                 <td>{{ $item->last_purchase_price ?? "Bulunamadı"  }}</td>
                                 <td>{{ $item->last_sales_price ?? "Bulunamadı" }}</td>
                                 <td>{{ $item->profit ?? "Bulunamadı"  }}</td>
+                                <td>{{ $item->server_name ?? ""  }}</td>
                                 <td>{{ $item->user_name }}</td>
                                 <td>
-                                    <a class="btn btn-primary"
+                                    <a class="btn btn-primary btn-xs"
                                        href="{{route('item.transactions', $item->id)}}">Hareketler
                                     </a>
-                                    <a class="btn btn-warning"
+                                    <a class="btn btn-warning btn-xs"
                                        onclick="getItem({{ $item->id }})">Düzenle
                                     </a>
-                                    <a class="btn btn-danger"
+                                    <a class="btn btn-danger btn-xs"
                                        onclick="deleteItem({{$item->id}})">Sil
                                     </a>
 
