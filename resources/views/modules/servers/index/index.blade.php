@@ -13,10 +13,10 @@
 
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title pull-left">Kullanıcı Listesi</h3>
-                    <a href="{{ route('user.create') }}"
+                    <h3 class="box-title pull-left">Server Listesi</h3>
+                    <a href="{{ route('server.create') }}"
                        class="btn btn-primary btn-sm btn-square
-                    pull-right">Kullanıcı
+                    pull-right">Server
                         Oluştur
                     </a>
                 </div>
@@ -24,47 +24,28 @@
                     <table class="table table-responsive table-striped">
                         <thead>
                         <tr class="border-bottom-primary">
-                            <th scope="col">#</th>
-                            <th scope="col">Adı</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Parola</th>
-                            <th scope="col">Durumu</th>
-                            <th scope="col">İşlemler</th>
+                            <th style="width:33.3%">#</th>
+                            <th style="width:33.3%">Adı</th>
+                            <th style="width:33.3%">İşlemler</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($users as $user)
-                            <tr>
-                                <th>{{ $user->id }}</th>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->password }}</td>
-                                @if (!$user->deleted_at)
-                                    <td>
-                                        <span class="badge bg-green"
-                                              name="status">Aktif</span>
-                                    </td>
-                                @else
-                                    <td>
-                                        <span class="badge bg-red"
-                                              name="status">Pasif</span>
-                                    </td>
-                                @endif
+                        @foreach ($servers as $server)
+                            <tr data-id="{{ $server->id }}">
+                                <th>{{ $server->id }}</th>
+                                <td>{{ $server->name }}</td>
+
                                 <td>
-                                    <a href="{{ route('user.edit', ['id' => $user->id]) }}"
-                                       class="btn btn-primary btn-xs editUser"
-                                       data-id="{{ $user->id }}"
+                                    <a href="{{ route('server.edit', ['id' => $server->id]) }}"
+                                       class="btn btn-primary btn-xs"
+                                       data-id="{{ $server->id }}"
                                        data-toggle="tooltip"
                                        data-placement="top"
                                        title="Düzenle"><i
                                             class="fa fa-edit"></i></a>
-                                    <a href="javascript:void(0)"
-                                       class="btn btn-danger btn-xs deleteUser"
-                                       data-id="{{ $user->id }}"
-                                       data-name="{{ $user->name }}"
-                                       data-toggle="tooltip"
-                                       data-placement="top"
-                                       title="Sil"><i class="fa fa-trash"></i></a>
+                                    <a class="btn btn-danger btn-xs"
+                                       onclick="deleteItem({{$server->id}})">Sil
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -78,9 +59,9 @@
 @endsection
 
 @section('customStyle')
-    @include('modules.users.index.components.style')
+    @include('modules.servers.index.components.style')
 @endsection
 
 @section('customScript')
-    @include('modules.users.index.components.script')
+    @include('modules.servers.index.components.script')
 @endsection

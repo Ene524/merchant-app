@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Kullanıcı Oluştur')
+@section('title', 'Server Oluştur')
 @section('content')
 
     <div class="row">
@@ -20,14 +20,13 @@
                 </div>
             @endif
 
-
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Kullanıcı Ekle</h3>
+                    <h3 class="box-title">Server Ekle</h3>
                 </div>
                 <div class="box-body with-border">
                     <form class="form-horizontal"
-                          action="{{ isset($user) ? route('user.edit', ['id' => $user->id]) : route('user.create') }}"
+                          action="{{ isset($server) ? route('server.edit', ['id' => $server->id]) : route('server.create') }}"
                           method="POST">
                         @csrf
                         <div class="box-body">
@@ -40,34 +39,7 @@
                                            type="text"
                                            name="name"
                                            placeholder="Adı"
-                                           value="{{ isset($user) ? $user->name : '' }}">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="inputFullName3"
-                                       class="col-sm-2 control-label">Email
-                                </label>
-                                <div class="col-sm-10">
-                                    <input class="form-control"
-                                           type="text"
-                                           name="email"
-                                           placeholder="Email"
-                                           value="{{ isset($user) ? $user->email : '' }}">
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="inputFullName3"
-                                       class="col-sm-2 control-label">Password
-                                </label>
-                                <div class="col-sm-10">
-                                    <input class="form-control"
-                                           type="password"
-                                           name="password"
-                                           placeholder="Password"
-                                           value="{{ isset($user) ? $user->password : '' }}">
+                                           value="{{ isset($server) ? $server->name : '' }}">
                                 </div>
                             </div>
                         </div>
@@ -93,9 +65,9 @@
 @endsection
 
 @section('customStyle')
-    @include('modules.users.create-update.components.style')
+    @include('modules.servers.create-update.components.style')
 @endsection
 
 @section('customScript')
-    @include('modules.users.create-update.components.script')
+    @include('modules.servers.create-update.components.script')
 @endsection

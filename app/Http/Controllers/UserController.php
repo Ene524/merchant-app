@@ -35,7 +35,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrfail($id);
-        return view('modules.user.create-update.index', compact('user'));
+        return view('modules.users.create-update.index', compact('user'));
     }
 
     public function update(UserRequest $request, $id)
@@ -46,7 +46,6 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->email_verified_at = now();
         $user->save();
-        $user->syncRoles($request->role);
         return redirect()->route('user.index')->with('success', 'Kullanıcı başarıyla güncellendi');
     }
 

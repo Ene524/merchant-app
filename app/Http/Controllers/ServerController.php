@@ -23,38 +23,28 @@ class ServerController extends Controller
     {
         $server = new Server();
         $server->name = $request->name;
-        $server->email = $request->email;
-        $server->password = Hash::make($request->password);
-        $server->email_verified_at = now();
         $server->save();
 
-        return redirect()->route('server.index')->with('success', 'Kullanıcı başarıyla oluşturuldu');
+        return redirect()->route('server.index')->with('success', 'Server başarıyla oluşturuldu');
     }
 
     public function edit($id)
     {
         $server = Server::findOrfail($id);
-        return view('modules.serves.create-update.index', compact('server'));
+        return view('modules.servers.create-update.index', compact('server'));
     }
 
     public function update(ServerRequest $request, $id)
     {
         $server = Server::findOrfail($id);
         $server->name = $request->name;
-        $server->email = $request->email;
-        $server->password = Hash::make($request->password);
-        $server->email_verified_at = now();
         $server->save();
-        $server->syncRoles($request->role);
-        return redirect()->route('server.index')->with('success', 'Kullanıcı başarıyla güncellendi');
+        return redirect()->route('server.index')->with('success', 'Server başarıyla güncellendi');
     }
 
     public function delete(Request $request)
     {
-        $request->validate([
-            'serverID' => 'required|exists:server,id',
-        ]);
-        $server = Server::find($request->serverID);
+        $server = Server::find($request->id);
         $server->delete();
         return response()->json(['status' => 'success']);
     }

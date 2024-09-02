@@ -29,7 +29,7 @@ class ServerRequest extends FormRequest
     public function messages()
     {
         return [
-            "name.required" => "Ad boş olamaz",
+            "name.required" => "Server adı boş olamaz",
         ];
     }
 }
