@@ -8,28 +8,16 @@ use App\Http\Requests\ItemTransactionCreateorUpdateRequest;
 use App\Models\Item;
 use App\Models\ItemTransaction;
 use App\Models\Server;
-use DB;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $servers = Server::all();
-        $items=DB::select('SELECT
-        items.id,
-        items.name,
-        COALESCE((SELECT SUM(quantity) FROM item_transactions WHERE type=1 AND item_id=items.id),0)-
-        COALESCE((SELECT SUM(quantity) FROM item_transactions WHERE type=2 AND item_id=items.id),0) quantity,
-        (SELECT price FROM item_transactions WHERE type=1 AND item_id=items.id ORDER BY created_at DESC LIMIT 1) last_purchase_price,
-        (SELECT price FROM item_transactions WHERE type=2 AND item_id=items.id ORDER BY created_at DESC LIMIT 1) last_sales_price,
-        (SELECT price FROM item_transactions WHERE type = 2 AND item_id = items.id ORDER BY created_at DESC LIMIT 1) -
-        (SELECT price FROM item_transactions WHERE type = 1 AND item_id = items.id ORDER BY created_at DESC LIMIT 1) AS profit,
-        servers.name server_name,
-        users.name user_name
-        FROM items
-        LEFT JOIN users ON items.user_id=users.id
-        LEFT JOIN servers ON items.server_id=servers.id');
+        $search = $request->input('search');
+
+        $items = Item::withDetails($search)->get();
         return view('modules.items.index.index', compact('items', 'servers'));
     }
 

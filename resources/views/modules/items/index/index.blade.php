@@ -21,7 +21,40 @@
                             data-target="#itemModal">Item Oluştur
                     </button>
                 </div>
+
+
                 <div class="box-body with-border">
+
+                    <form action="{{ route('item.index') }}"
+                          method="GET">
+                        <table class="table table-responsive">
+                            <tbody>
+                            <tr>
+                                <td style="width:12.5%">
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="Adı"
+                                           name="name"
+                                           value="{{request()->get("name")}}">
+                                </td>
+                                <td style="width:12.5%">
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="Adı"
+                                           name="name"
+                                           value="{{request()->get("name")}}">
+                                </td>
+                                <td style="width:12.5%"></td>
+                                <td style="width:12.5%"></td>
+                                <td style="width:12.5%"></td>
+                                <td style="width:12.5%"></td>
+                                <td style="width:12.5%"></td>
+                                <td style="width:12.5%"></td>
+                            </tbody>
+                        </table>
+                    </form>
+
+
                     <table class="table table-responsive table-striped"
                            id="employeeTable">
                         <thead>
