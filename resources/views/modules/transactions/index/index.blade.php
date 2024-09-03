@@ -26,8 +26,8 @@
                     </button>
                 </div>
                 <div class="box-body with-border">
-                    <table class="table table-responsive table-striped"
-                           id="employeeTable">
+                    <table class="table table-responsive"
+                           id="itemTransactionTable">
                         <thead>
                         <tr class="border-bottom-primary">
                             <th style="width:16.6%">Fiyat Tipi</th>

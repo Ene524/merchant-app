@@ -1,13 +1,31 @@
 <script src="{{asset('assets/bower_components/sweet-alert/sweetalert.min.js')}}"></script>
+<script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.1.5/js/dataTables.bootstrap.js"></script>
+
 <script>
-    $('body').on('keypress',function(e){
+    $('body').on('keypress', function (e) {
         var key = (e.keyCode || e.which);
-        if(key == 13 || key == 3){
+        if (key == 13 || key == 3) {
             $('#saveItemTransaction').click();
         }
     });
-</script>
-<script>
+
+    $("#itemTransactionTable").DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true,
+            "responsive": true,
+            "order": [[0, "desc"]],
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Turkish.json"
+            }
+        }
+    );
+
+
     $('#saveItemTransaction').on('click', function () {
         var id = $('#id').val();
         var item_id = $('#item_id').val();
@@ -106,6 +124,4 @@
             }
         });
     }
-
-
 </script>

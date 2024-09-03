@@ -1,13 +1,23 @@
 <script src="{{asset('assets/bower_components/sweet-alert/sweetalert.min.js')}}"></script>
+<script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.1.5/js/dataTables.bootstrap.js"></script>
 <script>
     $('body').on('keypress', function (e) {
         var key = (e.keyCode || e.which);
         if (key == 13 || key == 3) {
             $('#saveItem').click();
         }
-    });</script>
+    });
 
-<script>
+    $("#itemTable").DataTable(
+        {
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Turkish.json"
+            },
+        }
+    );
+
+
     $('#saveItem').on('click', function () {
         var name = $('#name').val();
         var description = $('#description').val();
@@ -105,5 +115,4 @@
             }
         });
     }
-
 </script>

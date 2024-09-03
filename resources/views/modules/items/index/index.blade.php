@@ -25,38 +25,20 @@
 
                 <div class="box-body with-border">
 
-                    <form action="{{ route('item.index') }}"
-                          method="GET">
-                        <table class="table table-responsive">
-                            <tbody>
-                            <tr>
-                                <td style="width:12.5%">
-                                    <input type="text"
-                                           class="form-control"
-                                           placeholder="Adı"
-                                           name="name"
-                                           value="{{request()->get("name")}}">
-                                </td>
-                                <td style="width:12.5%">
-                                    <input type="text"
-                                           class="form-control"
-                                           placeholder="Adı"
-                                           name="name"
-                                           value="{{request()->get("name")}}">
-                                </td>
-                                <td style="width:12.5%"></td>
-                                <td style="width:12.5%"></td>
-                                <td style="width:12.5%"></td>
-                                <td style="width:12.5%"></td>
-                                <td style="width:12.5%"></td>
-                                <td style="width:12.5%"></td>
-                            </tbody>
-                        </table>
-                    </form>
+                    {{--                    <form action="{{ route('item.index') }}"--}}
+                    {{--                          method="GET">--}}
+
+                    {{--                                    <input type="text"--}}
+                    {{--                                           class="form-control"--}}
+                    {{--                                           placeholder="Adı"--}}
+                    {{--                                           name="name"--}}
+                    {{--                                           value="{{request()->get("name")}}">--}}
+                    {{--                              --}}
+                    {{--                    </form> --}}
 
 
-                    <table class="table table-responsive table-striped"
-                           id="employeeTable">
+                    <table class="table table-responsive"
+                           id="itemTable">
                         <thead>
                         <tr class="border-bottom-primary">
                             <th style="width:12.5%">Item Adı</th>
