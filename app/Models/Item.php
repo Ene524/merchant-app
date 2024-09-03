@@ -26,17 +26,9 @@ class Item extends Model
     {
         return $this->belongsTo(Server::class);
     }
-
-    public function scopeServer($query, $server_id)
-    {
-        if ($server_id != null) {
-            return $query->where("server_id", $server_id);
-        }
-    }
-
     public function scopeWithDetails(Builder $query, $search = null)
     {
-        $query->select('items.id', 'items.name', 'servers.name as server_name', 'users.name as user_name')
+        $query->select('items.id', 'items.name', 'servers.name as server_name', 'users.name as user_name', 'items.created_at')
             ->leftJoin('users', 'items.user_id', '=', 'users.id')
             ->leftJoin('servers', 'items.server_id', '=', 'servers.id')
             ->selectRaw('COALESCE((SELECT SUM(quantity) FROM item_transactions WHERE type=1 AND item_id=items.id),0)-

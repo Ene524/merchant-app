@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            @if(session()->has('success'))
+            @if (session()->has('success'))
                 <div class="alert alert-success">
                     {{ session()->get('success') }}
                 </div>
@@ -25,51 +25,49 @@
 
                 <div class="box-body with-border">
 
-                    {{--                    <form action="{{ route('item.index') }}"--}}
-                    {{--                          method="GET">--}}
+                    {{-- <form action="{{ route('item.index') }}" method="GET">
 
-                    {{--                                    <input type="text"--}}
-                    {{--                                           class="form-control"--}}
-                    {{--                                           placeholder="Adı"--}}
-                    {{--                                           name="name"--}}
-                    {{--                                           value="{{request()->get("name")}}">--}}
-                    {{--                              --}}
-                    {{--                    </form> --}}
+                        <input type="text" class="form-control" placeholder="Adı" name="name"
+                            value="{{ request()->get('name') }}">
+
+                    </form> --}}
 
 
                     <table class="table table-responsive"
                            id="itemTable">
                         <thead>
                         <tr class="border-bottom-primary">
-                            <th style="width:12.5%">Item Adı</th>
-                            <th style="width:12.5%">Eldeki Miktar</th>
-                            <th style="width:12.5%">Son Alış Fiyatı</th>
-                            <th style="width:12.5%">Son Satış Fiyatı</th>
-                            <th style="width:12.5%">Son işlemden sonra kâr/zarar</th>
-                            <th style="width:12.5%">Server</th>
-                            <th style="width:12.5%">Oluşturan</th>
-                            <th style="width:12.5%">İşlemler</th>
+                            <th style="width:11.1%">Item Adı</th>
+                            <th style="width:11.1%">Eldeki Miktar</th>
+                            <th style="width:11.1%">Son Alış Fiyatı</th>
+                            <th style="width:11.1%">Son Satış Fiyatı</th>
+                            <th style="width:11.1%">Son işlemden sonra kâr/zarar</th>
+                            <th style="width:11.1%">Server</th>
+                            <th style="width:11.1%">Oluşturan</th>
+                            <th style="width:11.1%">Oluşturma Zamanı</th>
+                            <th style="width:11.1%">İşlemler</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($items as $item)
+                        @foreach ($items as $item)
                             <tr data-id="{{ $item->id }}">
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->quantity ?? "0" }}</td>
-                                <td>{{ $item->last_purchase_price ?? "Bulunamadı"  }}</td>
-                                <td>{{ $item->last_sales_price ?? "Bulunamadı" }}</td>
-                                <td>{{ $item->profit ?? "Bulunamadı"  }}</td>
-                                <td>{{ $item->server_name ?? ""  }}</td>
+                                <td>{{ $item->quantity ?? '0' }}</td>
+                                <td>{{ $item->last_purchase_price ?? 'Bulunamadı' }}</td>
+                                <td>{{ $item->last_sales_price ?? 'Bulunamadı' }}</td>
+                                <td>{{ $item->profit ?? 'Bulunamadı' }}</td>
+                                <td>{{ $item->server_name ?? '' }}</td>
                                 <td>{{ $item->user_name }}</td>
+                                <td>{{ $item->created_at }}</td>
                                 <td>
                                     <a class="btn btn-primary btn-xs"
-                                       href="{{route('item.transactions', $item->id)}}">Hareketler
+                                       href="{{ route('item.transactions', $item->id) }}">Hareketler
                                     </a>
                                     <a class="btn btn-warning btn-xs"
                                        onclick="getItem({{ $item->id }})">Düzenle
                                     </a>
                                     <a class="btn btn-danger btn-xs"
-                                       onclick="deleteItem({{$item->id}})">Sil
+                                       onclick="deleteItem({{ $item->id }})">Sil
                                     </a>
 
                                 </td>
