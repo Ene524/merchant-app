@@ -39,6 +39,7 @@
                                 <input class="form-control"
                                        type="number"
                                        name="quantity"
+                                       onkeyup="calculatePrice()"
                                        id="quantity"/>
                             </div>
                         </div>
@@ -49,10 +50,20 @@
                                 <input class="form-control"
                                        type="number"
                                        name="price"
+                                       onkeyup="calculatePrice()"
                                        id="price"/>
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Item Fiyatı Vergisiz</label>
+                            <div class="col-sm-10">
+                                <input class="form-control"
+                                       type="number"
+                                       name="price_with_vat"
+                                       id="price_with_vat"/>
+                            </div>
+                        </div>
 
                         <div class="modal-footer">
                             <button class="btn btn-danger"

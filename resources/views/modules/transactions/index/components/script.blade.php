@@ -11,20 +11,18 @@
     });
 
     $("#itemTransactionTable").DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true,
-            "responsive": true,
-            "order": [[0, "desc"]],
-            "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Turkish.json"
-            }
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "responsive": true,
+        "order": [[0, "desc"]],
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Turkish.json"
         }
-    );
-
+    });
 
     $('#saveItemTransaction').on('click', function () {
         var id = $('#id').val();
@@ -123,5 +121,15 @@
                 })
             }
         });
+    }
+
+    function calculatePrice() {
+        var price = $('#price').val();
+        var quantity = $('#quantity').val();
+
+
+        var price_with_tax = (price * quantity) - ((price * quantity) * 0.03);
+        $('#price_with_vat').val(price_with_tax);
+
     }
 </script>
