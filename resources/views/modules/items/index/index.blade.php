@@ -24,14 +24,12 @@
 
 
                 <div class="box-body with-border">
-
-                    {{-- <form action="{{ route('item.index') }}" method="GET">
-
-                        <input type="text" class="form-control" placeholder="Adı" name="name"
-                            value="{{ request()->get('name') }}">
-
-                    </form> --}}
-
+                    <div class="text-center">
+                        @foreach($servers as $server)
+                            <button class="btn btn-default server-name col-2"
+                                    data-server-name="{{$server->name}}">{{$server->name}}</button>
+                        @endforeach
+                    </div>
 
                     <table class="table table-responsive"
                            id="itemTable">

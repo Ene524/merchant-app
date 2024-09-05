@@ -9,15 +9,12 @@
         }
     });
 
-    $("#itemTable").DataTable(
-        {
-            "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Turkish.json"
-            },
-            "order": [[7, "asc"]]
-        }
-    );
-
+    var table = $("#itemTable").DataTable({
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Turkish.json"
+        },
+        "order": [[7, "asc"]]
+    });
 
     $('#saveItem').on('click', function () {
         var name = $('#name').val();
@@ -116,4 +113,13 @@
             }
         });
     }
+
+    $('.server-name').on('click', function () {
+        var serverId = $(this).data('server-name');
+
+        // server_id sütununun indeks numarasını kontrol edin, örneğin: 2
+        var columnIndex = 2;
+
+        table.column(columnIndex).search('^' + serverId + '$', true, false).draw(); // Tam eşleşme için düzenli ifade kullanma
+    });
 </script>
