@@ -86,9 +86,9 @@
         });
     }
 
-    function deleteItem(id) {
+    function deleteItemTransaction(id) {
         swal({
-            title: "İtemi silmek istediğinize emin misiniz?",
+            title: "İtem hareketini silmek istediğinize emin misiniz?",
             icon: "error",
             buttons: true,
             dangerMode: true,
@@ -96,7 +96,7 @@
         }).then((willDelete) => {
             if (willDelete) {
                 $.ajax({
-                    url: '{{route('item.delete')}}',
+                    url: '{{route('transaction.delete')}}',
                     type: 'DELETE',
                     data: {
                         id: id,

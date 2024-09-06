@@ -17,6 +17,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/items/transactions/{id}', [ItemController::class, 'itemTransactions'])->name('item.transactions');
     Route::post('/items/transactions/createOrUpdate', [ItemController::class, 'transactionStore'])->name('item.transactionStore');
     Route::get('/editTransaction', [ItemController::class, 'editTransaction'])->name('transaction.edit');
+    Route::delete('/deleteTransaction', [ItemController::class, 'transactionDelete'])->name('transaction.delete');
+    Route::get('/getTransactionForChart', [ItemController::class, 'getTransactionForChart'])->name('transaction.chart');
 
 
     Route::prefix('user')->group(function () {

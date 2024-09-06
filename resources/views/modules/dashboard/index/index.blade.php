@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            @if(session()->has('success'))
+            @if (session()->has('success'))
                 <div class="alert alert-success">
                     {{ session()->get('success') }}
                 </div>
@@ -15,7 +15,7 @@
                     <h3 class="box-title pull-left">Dashboard</h3>
                 </div>
                 <div class="box-body with-border">
-                    <span class="pull-right"></span>
+                    {{--                    <canvas id="itemChart" width="400" height="150"></canvas>--}}
                 </div>
             </div>
         </div>

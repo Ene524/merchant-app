@@ -9,6 +9,7 @@ use App\Models\Item;
 use App\Models\ItemTransaction;
 use App\Models\Server;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
 {
@@ -86,8 +87,35 @@ class ItemController extends Controller
             return response()->json(['success' => 'ItemTransaction created successfully.']);
         }
     }
+
     public function editTransaction(Request $request)
     {
         return ItemTransaction::find($request->id);
+    }
+
+    public function transactionDelete(Request $request)
+    {
+        ItemTransaction::find($request->id)->delete();
+        return response()->json(['success' => 'Item deleted successfully.']);
+    }
+
+    public function getTransactionForChart(Request $request)
+    {
+        $transactionForChart = DB::select("SELECT
+            i.name AS item_name,
+            t.created_at AS transaction_date,
+            SUM(CASE WHEN t.type = 1 THEN t.price ELSE 0 END) AS total_purchase_price,
+            SUM(CASE WHEN t.type = 2 THEN t.price ELSE 0 END) AS total_sale_price
+        FROM
+            items i
+        JOIN
+            item_transactions t ON i.id = t.item_id
+        WHERE
+            i.deleted_at IS NULL
+        GROUP BY
+            i.name, t.created_at
+        ORDER BY
+            t.created_at ASC;");
+        return response()->json($transactionForChart);
     }
 }

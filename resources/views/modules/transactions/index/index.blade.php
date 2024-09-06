@@ -48,10 +48,10 @@
                                 <td>{{ $itemTransaction->created_at }}</td>
                                 <td>{{ $itemTransaction->user->name }}</td>
                                 <td>
-                                    <a class="btn btn-warning"
+                                    <a class="btn btn-warning btn-xs"
                                        onclick="getItemTransaction({{ $itemTransaction->id }})">Düzenle
                                     </a>
-                                    <a class="btn btn-danger"
+                                    <a class="btn btn-danger btn-xs"
                                        onclick="deleteItemTransaction({{$itemTransaction->id}})">Sil
                                     </a>
 
