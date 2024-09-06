@@ -31,7 +31,7 @@
                         @endforeach
                     </div>
 
-                    <table class="table table-responsive"
+                    <table class="table table-responsive table-bordered"
                            id="itemTable">
                         <thead>
                         <tr class="border-bottom-primary">
