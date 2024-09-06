@@ -116,10 +116,13 @@
 
     $('.server-name').on('click', function () {
         var serverId = $(this).data('server-name');
-
-        // server_id sütununun indeks numarasını kontrol edin, örneğin: 2
-        var columnIndex = 2;
-
-        table.column(columnIndex).search('^' + serverId + '$', true, false).draw(); // Tam eşleşme için düzenli ifade kullanma
+        $('#itemTable tbody tr').each(function () {
+            var serverColumnText = $(this).find('td:nth-child(6)').text();
+            if (serverColumnText.indexOf(serverId) > -1 || serverId === "") {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
     });
 </script>

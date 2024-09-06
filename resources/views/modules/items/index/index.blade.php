@@ -26,7 +26,7 @@
                 <div class="box-body with-border">
                     <div class="text-center">
                         @foreach($servers as $server)
-                            <button class="btn btn-default server-name col-2"
+                            <button class="btn btn-primary server-name col-2"
                                     data-server-name="{{$server->name}}">{{$server->name}}</button>
                         @endforeach
                     </div>
