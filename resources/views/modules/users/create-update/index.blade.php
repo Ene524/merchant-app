@@ -7,7 +7,8 @@
 
 
             @if ($errors->all())
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger"
+                     role="alert">
                     <h4 class="alert-heading">Dikkat!</h4>
                     <p>İşleminiz gerçekleştirilemedi</p>
                     <hr>
@@ -31,36 +32,62 @@
                         @csrf
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="inputFullName3" class="col-sm-2 control-label">Adı</label>
+                                <label class="col-sm-2 control-label">Adı</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" name="name" placeholder="Adı"
+                                    <input class="form-control"
+                                           type="text"
+                                           name="name"
+                                           placeholder="Adı"
                                            value="{{ isset($user) ? $user->name : '' }}">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="inputFullName3" class="col-sm-2 control-label">Email</label>
+                                <label class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" name="email" placeholder="Email"
+                                    <input class="form-control"
+                                           type="text"
+                                           name="email"
+                                           placeholder="Email"
                                            value="{{ isset($user) ? $user->email : '' }}">
                                 </div>
                             </div>
 
 
                             <div class="form-group">
-                                <label for="inputFullName3" class="col-sm-2 control-label">Password</label>
+                                <label class="col-sm-2 control-label">Password</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="password" name="password" placeholder="Password"
-                                           value="{{ isset($user) ? $user->password : '' }}">
+                                    <input class="form-control"
+                                           type="password"
+                                           name="password"
+                                           placeholder="Password">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Admin mi?</label>
+                                <div class="col-sm-10">
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"
+                                                   name="is_admin"
+                                                   id="is_admin" {{isset($user) && $user->is_admin !=null ? 'checked' : ''}}>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
 
                         <div class="box-footer">
-                            <button type="button" class="btn btn-default pull-right" style="margin-left: 5px">Vazgeç
+                            <a href="{{ route('user.index') }}"
+                               class="btn btn-default pull-right"
+                               style="margin-left: 5px">Vazgeç
+                            </a>
+                            <button type="submit"
+                                    class="btn btn-info pull-right">Kaydet
                             </button>
-                            <button type="submit" class="btn btn-info pull-right">Kaydet</button>
 
                         </div>
                     </form>

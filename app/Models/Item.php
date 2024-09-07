@@ -35,8 +35,8 @@ class Item extends Model
                 COALESCE((SELECT SUM(quantity) FROM item_transactions WHERE type=2 AND item_id=items.id),0) as quantity')
             ->selectRaw('(SELECT price FROM item_transactions WHERE type=1 AND item_id=items.id ORDER BY created_at DESC LIMIT 1) as last_purchase_price')
             ->selectRaw('(SELECT price FROM item_transactions WHERE type=2 AND item_id=items.id ORDER BY created_at DESC LIMIT 1) as last_sales_price')
-            ->selectRaw('(SELECT price FROM item_transactions WHERE type = 2 AND item_id = items.id ORDER BY created_at DESC LIMIT 1) -
-                (SELECT price FROM item_transactions WHERE type = 1 AND item_id = items.id ORDER BY created_at DESC LIMIT 1) AS profit');
+            ->selectRaw('(SELECT SUM(price) FROM item_transactions WHERE type = 2 AND item_id = items.id ORDER BY created_at DESC LIMIT 1) -
+                (SELECT SUM(price) FROM item_transactions WHERE type = 1 AND item_id = items.id ORDER BY created_at DESC LIMIT 1) AS profit');
 
         if ($search) {
             $query->where('items.name', 'LIKE', "%{$search}%")

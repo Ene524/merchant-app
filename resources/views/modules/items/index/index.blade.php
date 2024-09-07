@@ -20,6 +20,15 @@
                             data-toggle="modal"
                             data-target="#itemModal">Item Oluştur
                     </button>
+                    <button id="selectAll"
+                            style="margin-left:5px"
+                            class="btn btn-danger btn-sm pull-right">Tümünü Seç
+                    </button>
+                    <button id="deleteSelected"
+                            style="margin-left:5px"
+                            class="btn btn-danger btn-sm pull-right">Seçilenleri Sil
+                    </button>
+
                 </div>
 
 
@@ -29,12 +38,16 @@
                             <button class="btn btn-primary server-name col-2"
                                     data-server-name="{{$server->name}}">{{$server->name}}</button>
                         @endforeach
+                        <button class="btn btn-info col-2"
+                                id="clearFilter">Filtreyi Temizle
+                        </button>
                     </div>
 
                     <table class="table table-responsive table-bordered"
                            id="itemTable">
                         <thead>
                         <tr class="border-bottom-primary">
+                            <th></th>
                             <th style="width:11.1%">Item Adı</th>
                             <th style="width:11.1%">Eldeki Miktar</th>
                             <th style="width:11.1%">Son Alış Fiyatı</th>
@@ -49,6 +62,11 @@
                         <tbody>
                         @foreach ($items as $item)
                             <tr data-id="{{ $item->id }}">
+                                <td>
+                                    <input type="checkbox"
+                                           class="itemCheckbox"
+                                           data-id="{{ $item->id }}">
+                                </td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->quantity ?? '0' }}</td>
                                 <td>{{ $item->last_purchase_price ?? 'Bulunamadı' }}</td>

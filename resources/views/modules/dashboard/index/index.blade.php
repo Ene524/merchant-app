@@ -15,7 +15,9 @@
                     <h3 class="box-title pull-left">Dashboard</h3>
                 </div>
                 <div class="box-body with-border">
-                    {{--                    <canvas id="itemChart" width="400" height="150"></canvas>--}}
+                    {{--                    <canvas id="itemChart"--}}
+                    {{--                            width="400"--}}
+                    {{--                            height="150"></canvas>--}}
                 </div>
             </div>
         </div>

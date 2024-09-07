@@ -17,7 +17,8 @@
                     <a href="{{ route('user.create') }}"
                        class="btn btn-primary btn-sm btn-square
                     pull-right">Kullanıcı
-                        Oluştur</a>
+                        Oluştur
+                    </a>
                 </div>
                 <div class="box-body with-border">
                     <table class="table table-responsive table-striped">
@@ -27,6 +28,7 @@
                             <th scope="col">Adı</th>
                             <th scope="col">Email</th>
                             <th scope="col">Parola</th>
+                            <th scope="col">Admin</th>
                             <th scope="col">Durumu</th>
                             <th scope="col">İşlemler</th>
                         </tr>
@@ -38,19 +40,43 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->password }}</td>
-                                @if (!$user->deleted_at)
-                                    <td><span class="badge bg-green" name="status">Aktif</span></td>
+                                @if ($user->is_admin)
+                                    <td>
+                                        <span class="badge bg-blue"
+                                              name="admin">Admin</span>
+                                    </td>
                                 @else
-                                    <td><span class="badge bg-red" name="status">Pasif</span></td>
+                                    <td>
+                                        <span class="badge bg-gray"
+                                              name="admin">Kullanıcı</span>
+                                    </td>
+                                @endif
+                                @if (!$user->deleted_at)
+                                    <td>
+                                        <span class="badge bg-green"
+                                              name="status">Aktif</span>
+                                    </td>
+                                @else
+                                    <td>
+                                        <span class="badge bg-red"
+                                              name="status">Pasif</span>
+                                    </td>
                                 @endif
                                 <td>
                                     <a href="{{ route('user.edit', ['id' => $user->id]) }}"
-                                       class="btn btn-primary btn-xs editUser" data-id="{{ $user->id }}"
-                                       data-toggle="tooltip" data-placement="top" title="Düzenle"><i
+                                       class="btn btn-primary btn-xs editUser"
+                                       data-id="{{ $user->id }}"
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="Düzenle"><i
                                             class="fa fa-edit"></i></a>
-                                    <a href="javascript:void(0)" class="btn btn-danger btn-xs deleteUser"
-                                       data-id="{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="tooltip"
-                                       data-placement="top" title="Sil"><i class="fa fa-trash"></i></a>
+                                    <a href="javascript:void(0)"
+                                       class="btn btn-danger btn-xs deleteUser"
+                                       data-id="{{ $user->id }}"
+                                       data-name="{{ $user->name }}"
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="Sil"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach

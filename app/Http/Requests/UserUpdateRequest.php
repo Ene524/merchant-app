@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,9 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id'=>'nullable',
+            'id' => 'nullable',
             'name' => 'required|max:255',
-            'email' => 'required|unique:users|max:255',
-            'password' => 'required|max:255',
+            'email' => 'required|max:255',
         ];
     }
 
@@ -35,10 +34,7 @@ class UserRequest extends FormRequest
             'name.required' => 'Ad alanı zorunludur',
             'name.max' => 'Ad alanı en fazla 255 karakter olabilir',
             'email.required' => 'E-posta alanı zorunludur',
-            'email.unique' => 'Bu e-posta adresi zaten kullanılmaktadır',
             'email.max' => 'E-posta alanı en fazla 255 karakter olabilir',
-            'password.required' => 'Şifre alanı zorunludur',
-            'password.max' => 'Şifre alanı en fazla 255 karakter olabilir',
         ];
     }
 }

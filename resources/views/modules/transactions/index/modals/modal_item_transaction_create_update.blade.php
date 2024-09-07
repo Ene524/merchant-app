@@ -21,14 +21,14 @@
                                name="id"
                                id="id"/>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Fiyat Tipi</label>
+                            <label class="col-sm-2 control-label">Tip</label>
                             <div class="col-sm-10">
                                 <select class="form-control"
                                         name="type"
                                         id="type">
                                     <option value="{{null}}">Seçiniz</option>
-                                    <option value="1">Alış Fiyatı</option>
-                                    <option value="2">Satış Fiyatı</option>
+                                    <option value="1">Alış</option>
+                                    <option value="2">Satış</option>
                                 </select>
                             </div>
                         </div>

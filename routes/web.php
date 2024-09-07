@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/getTransactionForChart', [ItemController::class, 'getTransactionForChart'])->name('transaction.chart');
 
 
-    Route::prefix('user')->group(function () {
+    Route::prefix('user')->middleware('admin')->group(function () {
         Route::get('index', [UserController::class, 'index'])->name('user.index');
         Route::get('create', [UserController::class, 'create'])->name('user.create');
         Route::post('create', [UserController::class, 'store']);

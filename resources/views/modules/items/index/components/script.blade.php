@@ -117,7 +117,7 @@
     $('.server-name').on('click', function () {
         var serverId = $(this).data('server-name');
         $('#itemTable tbody tr').each(function () {
-            var serverColumnText = $(this).find('td:nth-child(6)').text();
+            var serverColumnText = $(this).find('td:nth-child(7)').text();
             if (serverColumnText.indexOf(serverId) > -1 || serverId === "") {
                 $(this).show();
             } else {
@@ -125,4 +125,74 @@
             }
         });
     });
+
+    $('#clearFilter').on('click', function () {
+        $('#itemTable tbody tr').show();
+    });
+
+    $('#selectAll').on('click', function () {
+        if ($('#selectAll').data('selected') === 'true') {
+            $('.itemCheckbox').prop('checked', false);
+            $('#selectAll').data('selected', 'false');
+        } else {
+            $('.itemCheckbox').prop('checked', true);
+            $('#selectAll').data('selected', 'true');
+        }
+
+    });
+
+    $("#deleteSelected").on('click', function () {
+        var selectedItems = [];
+        $('.itemCheckbox:checked').each(function () {
+            selectedItems.push($(this).data('id'));
+        });
+
+        console.log(selectedItems);
+
+        if (selectedItems.length === 0) {
+            swal("Lütfen silmek istediğiniz itemleri seçin", {
+                icon: "warning",
+                timer: 3000
+            });
+            return;
+        }
+
+        swal({
+            title: "Seçilen itemleri silmek istediğinize emin misiniz?",
+            icon: "error",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: '{{route('item.delete')}}',
+                    type: 'DELETE',
+                    data: {
+                        id: selectedItems,
+                        _token: '{{csrf_token()}}'
+                    },
+                    success: function (response) {
+                        swal("İşlem tamamlandı", {
+                            icon: "success",
+                            timer: 3000
+                        });
+                        selectedItems.forEach(function (id) {
+                            $('tr[data-id="' + id + '"]').fadeOut(1500, function () {
+                                $(this).remove();
+                            });
+                        });
+                    }.bind(this),
+                    error: function (response) {
+                        console.log(response);
+                        swal("Bir sorun oluştu".response, {
+                            icon: "error",
+                            timer: 3000
+                        });
+                    }
+                })
+            }
+        });
+    });
+
+
 </script>

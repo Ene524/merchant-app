@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
                 'email' => 'mail.eneskarakus@gmail.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('1'),
+                'is_admin' => 1,
                 'remember_token' => Str::random(10),
             ]);
         }

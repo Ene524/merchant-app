@@ -52,7 +52,8 @@ class ItemController extends Controller
 
     public function delete(Request $request)
     {
-        Item::find($request->id)->delete();
+        $ids = is_array($request->id) ? $request->id : [$request->id];
+        Item::whereIn('id', $ids)->delete();
         return response()->json(['success' => 'Item deleted successfully.']);
     }
 
