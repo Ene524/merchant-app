@@ -3,6 +3,7 @@
 @section('content')
 
     @include('modules.items.index.modals.modal_item_create_update')
+    @include('modules.items.index.modals.modal_item_excel_import')
 
     <div class="row">
         <div class="col-md-12">
@@ -15,6 +16,11 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title pull-left">Item Listesi</h3>
+                    <button class="btn btn-dark btn-sm pull-right"
+                            style="margin-left:5px"
+                            data-toggle="modal"
+                            data-target="#itemExcelModal">Excelden Al
+                    </button>
                     <button class="btn btn-primary btn-sm pull-right"
                             style="margin-left:5px"
                             data-toggle="modal"

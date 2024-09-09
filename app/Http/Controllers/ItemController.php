@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GetById;
 use App\Http\Requests\ItemCreateOrUpdateRequest;
 use App\Http\Requests\ItemTransactionCreateorUpdateRequest;
+use App\Imports\ItemsImport;
 use App\Models\Item;
 use App\Models\ItemTransaction;
 use App\Models\Server;
@@ -67,7 +68,6 @@ class ItemController extends Controller
 
     public function transactionStore(ItemTransactionCreateorUpdateRequest $request)
     {
-        //dd($request->all());
         if ($request->id) {
             $itemTransaction = ItemTransaction::find($request->id);
             $itemTransaction->item_id = $request->item_id;
@@ -118,5 +118,12 @@ class ItemController extends Controller
         ORDER BY
             t.created_at ASC;");
         return response()->json($transactionForChart);
+    }
+
+    public function importItems(Request $request)
+    {
+        $file = $request->file('file');
+        $import = new ItemsImport();
+        return response()->json(['success' => 'Items imported successfully.']);
     }
 }

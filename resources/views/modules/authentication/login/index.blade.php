@@ -7,7 +7,7 @@
             <b>Ko</b>Pa
         </div>
         <div class="login-box-body">
-            <p class="login-box-msg">Yetkili oturumunuzu başlatmak için giriş yapın</p>
+            <p class="login-box-msg">Merhaba Şövalye, hadi giriş yap</p>
 
 
             <form action="{{ route('user.login') }}" method="POST">

@@ -13,7 +13,7 @@
         "language": {
             "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Turkish.json"
         },
-        "order": [[7, "asc"]]
+        "order": [[7, "asc"]],
     });
 
     $('#saveItem').on('click', function () {
@@ -194,5 +194,33 @@
         });
     });
 
+    $("#saveFromExcel").on('click', function () {
+        var file = $('#file')[0].files[0];
+        var formData = new FormData();
+        formData.append('file', file);
+        formData.append('_token', '{{csrf_token()}}');
+
+        $.ajax({
+            url: '{{route('item.import')}}',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                console.log(response);
+                //window.location.reload();
+            },
+            error: function (response) {
+                console.log(response);
+                var errors = response.responseJSON.errors;
+                var errorHtml = '<div class="alert alert-danger"><ul>';
+                $.each(errors, function (key, value) {
+                    errorHtml += '<li>' + value + '</li>';
+                });
+                errorHtml += '</ul></div>';
+                $('#error-container').html(errorHtml);
+            }
+        });
+    });
 
 </script>

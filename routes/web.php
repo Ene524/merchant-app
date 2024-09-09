@@ -13,6 +13,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/createOrUpdate', [ItemController::class, 'store'])->name('item.store');
     Route::get('/edit', [ItemController::class, 'edit'])->name('item.edit');
     Route::delete('/delete', [ItemController::class, 'delete'])->name('item.delete');
+    Route::post('/import', [ItemController::class, 'importItems'])->name('item.import');
 
     Route::get('/items/transactions/{id}', [ItemController::class, 'itemTransactions'])->name('item.transactions');
     Route::post('/items/transactions/createOrUpdate', [ItemController::class, 'transactionStore'])->name('item.transactionStore');
