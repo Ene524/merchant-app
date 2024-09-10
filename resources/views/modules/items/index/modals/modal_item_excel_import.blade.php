@@ -26,8 +26,7 @@
                             <div class="col-sm-10">
                                 <input type="file"
                                        name="file"
-                                       id="file"
-                                       id="exampleInputFile">
+                                       id="file">
                             </div>
                             <p class="help-block">Excel dosyası xlsx formatında ve şablona uygun olmalıdır</p>
                         </div>

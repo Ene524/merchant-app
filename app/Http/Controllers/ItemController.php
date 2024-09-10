@@ -11,15 +11,21 @@ use App\Models\ItemTransaction;
 use App\Models\Server;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ItemController extends Controller
 {
     public function index(Request $request)
     {
+        //dd($request->all());
         $servers = Server::all();
-        $search = $request->input('search');
 
-        $items = Item::withDetails($search)->get();
+        $items = Item::with('user', 'server')
+            ->withDetails()
+            ->Server($request->server_id)
+            ->Name($request->name)
+            ->orderBy('items.created_at', 'desc')
+            ->paginate(5);
         return view('modules.items.index.index', compact('items', 'servers'));
     }
 
@@ -64,7 +70,6 @@ class ItemController extends Controller
         $itemTransactions = ItemTransaction::with('user')->where('item_id', $id)->get();
         return view('modules.transactions.index.index', compact('item', 'itemTransactions'));
     }
-
 
     public function transactionStore(ItemTransactionCreateorUpdateRequest $request)
     {
@@ -122,8 +127,7 @@ class ItemController extends Controller
 
     public function importItems(Request $request)
     {
-        $file = $request->file('file');
-        $import = new ItemsImport();
+        Excel::import(new ItemsImport(), $request->file('file'));
         return response()->json(['success' => 'Items imported successfully.']);
     }
 }

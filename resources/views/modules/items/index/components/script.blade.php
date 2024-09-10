@@ -1,6 +1,4 @@
 <script src="{{asset('assets/bower_components/sweet-alert/sweetalert.min.js')}}"></script>
-<script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
-<script src="https://cdn.datatables.net/2.1.5/js/dataTables.bootstrap.js"></script>
 <script>
     $('body').on('keypress', function (e) {
         var key = (e.keyCode || e.which);
@@ -9,12 +7,6 @@
         }
     });
 
-    var table = $("#itemTable").DataTable({
-        "language": {
-            "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Turkish.json"
-        },
-        "order": [[7, "asc"]],
-    });
 
     $('#saveItem').on('click', function () {
         var name = $('#name').val();
@@ -223,4 +215,19 @@
         });
     });
 
+</script>
+
+<script>
+    function submitFormWithServerId(serverId) {
+        // Yeni bir input oluştur ve server_id olarak ayarla
+        let form = document.querySelector('form');
+        let serverInput = document.createElement('input');
+        serverInput.type = 'hidden';
+        serverInput.name = 'server_id';
+        serverInput.value = serverId;
+
+        // Formun içerisine yeni input'u ekle ve formu gönder
+        form.appendChild(serverInput);
+        form.submit();
+    }
 </script>

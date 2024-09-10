@@ -26,6 +26,7 @@ class Item extends Model
     {
         return $this->belongsTo(Server::class);
     }
+
     public function scopeWithDetails(Builder $query, $search = null)
     {
         $query->select('items.id', 'items.name', 'servers.name as server_name', 'users.name as user_name', 'items.created_at')
@@ -37,15 +38,20 @@ class Item extends Model
             ->selectRaw('(SELECT price FROM item_transactions WHERE type=2 AND item_id=items.id ORDER BY created_at DESC LIMIT 1) as last_sales_price')
             ->selectRaw('(SELECT SUM(price) FROM item_transactions WHERE type = 2 AND item_id = items.id ORDER BY created_at DESC LIMIT 1) -
                 (SELECT SUM(price) FROM item_transactions WHERE type = 1 AND item_id = items.id ORDER BY created_at DESC LIMIT 1) AS profit');
-
-        if ($search) {
-            $query->where('items.name', 'LIKE', "%{$search}%")
-                ->orWhere('servers.name', 'LIKE', "%{$search}%")
-                ->orWhere('users.name', 'LIKE', "%{$search}%");
-        }
-
         return $query;
     }
 
+    public function scopeServer($query, $server_id)
+    {
+        if ($server_id) {
+            return $query->where('server_id', $server_id);
+        }
+    }
 
+    public function scopeName($query, $name)
+    {
+        if ($name) {
+            return $query->where('items.name', 'like', '%' . $name . '%');
+        }
+    }
 }
