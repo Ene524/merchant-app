@@ -24,7 +24,7 @@
                     <button class="btn btn-primary btn-sm pull-right"
                             style="margin-left:5px"
                             data-toggle="modal"
-                            data-target="#itemModal">Item Oluştur
+                            data-target="#itemModal">Oluştur
                     </button>
                     <button id="selectAll"
                             style="margin-left:5px"
@@ -44,6 +44,20 @@
                               method="GET">
                             <div class="row"
                                  style="margin-bottom: 10px">
+                                <div class="col-md-2"
+                                     style="width: 70px">
+                                    <select name="per_page"
+                                            class="form-control"
+                                            style="width: 70px">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <span>Kayıt Göster</span>
+                                </div>
                                 <div class="col-md-2">
                                     <input class="form-control"
                                            name="name"

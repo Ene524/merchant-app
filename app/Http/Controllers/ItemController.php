@@ -26,7 +26,7 @@ class ItemController extends Controller
             ->Server($request->server_id)
             ->Name($request->name)
             ->orderBy('items.created_at', 'desc')
-            ->paginate(10);
+            ->paginate($request->per_page ?? 10);
         return view('modules.items.index.index', compact('items', 'servers'));
     }
 
