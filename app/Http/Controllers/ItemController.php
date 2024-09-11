@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GetById;
+use App\Http\Requests\ItemCreateFromExcel;
 use App\Http\Requests\ItemCreateOrUpdateRequest;
 use App\Http\Requests\ItemTransactionCreateorUpdateRequest;
 use App\Imports\ItemsImport;
@@ -25,12 +26,14 @@ class ItemController extends Controller
             ->Server($request->server_id)
             ->Name($request->name)
             ->orderBy('items.created_at', 'desc')
-            ->paginate(5);
+            ->paginate(10);
         return view('modules.items.index.index', compact('items', 'servers'));
     }
 
     public function store(ItemCreateOrUpdateRequest $request)
     {
+
+
         if ($request->id) {
             $item = Item::find($request->id);
             $item->name = $request->name;
@@ -125,7 +128,7 @@ class ItemController extends Controller
         return response()->json($transactionForChart);
     }
 
-    public function importItems(Request $request)
+    public function importItems(ItemCreateFromExcel $request)
     {
         Excel::import(new ItemsImport(), $request->file('file'));
         return response()->json(['success' => 'Items imported successfully.']);

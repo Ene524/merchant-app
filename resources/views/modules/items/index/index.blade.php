@@ -42,25 +42,33 @@
                     <div class="text-center">
                         <form action="{{ route('item.index') }}"
                               method="GET">
-                            <div class="row">
-                                <div class="col-12 col-md-2">
+                            <div class="row"
+                                 style="margin-bottom: 10px">
+                                <div class="col-md-2">
                                     <input class="form-control"
                                            name="name"
-                                           placeholder="İsim">
+                                           placeholder="İsim"
+                                           value="{{ request('name') }}">
                                 </div>
-                                <div class="col-12 col-md-10 d-flex">
-                                    @foreach($servers as $server)
-                                        <button type="button"
-                                                class="btn btn-info me-2"
-                                                onclick="submitFormWithServerId({{ $server->id }})">
-                                            {{ $server->name }}
-                                        </button>
-                                    @endforeach
+                                <div class="col-md-2">
+
+                                    <select class="form-control mr-2 select2"
+                                            name="server_id">
+                                        <option value="{{null}}">Server Seçiniz</option>
+                                        @foreach($servers as $server)
+                                            <option value="{{ $server->id }}" {{ request('server_id') == $server->id ? 'selected' : '' }}>
+                                                {{ $server->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
                                     <button type="submit"
-                                            name="server_id"
-                                            value=""
-                                            class="btn btn-info">Filtreyi Temizle
+                                            class="btn btn-info">Filtrele
                                     </button>
+                                    <a href="{{route('item.index')}}"
+                                       class="btn btn-info">Filtreyi Temizle
+                                    </a>
                                 </div>
                             </div>
                         </form>
@@ -115,12 +123,17 @@
                             </tr>
                         @endforeach
                     </table>
-                    <span class="pull-right"
-                          style="margin:0px">{{$items->appends($_GET)->onEachSide(2)->links()}}</span>
+                    <span class="pull-left"
+                          style="line-height: 45px">
+                    {{$items->currentPage() * $items->perPage() - $items->perPage() + 1}} -
+                    {{$items->currentPage() * $items->perPage()}} arasındaki kayıtlar gösteriliyor.
+                    Toplam Kayıt :
+                    {{$items->total()}}
+                        </span>
+                    <span class="pull-right">{{$items->appends($_GET)->onEachSide(2)->links()}}</span>
                 </div>
             </div>
         </div>
-
     </div>
 
 @endsection

@@ -4,10 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ItemCreateOrUpdateRequest extends FormRequest
+class ItemCreateFromExcel extends FormRequest
 {
     /**
-     * Determine if the users is authorized to make this request.
+     * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
@@ -22,16 +22,15 @@ class ItemCreateOrUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:items,name,' . $this->id . ',id,server_id,' . $this->server_id,
-            'server_id' => 'required',
+            'file' => 'required|mimes:xlsx,xls',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name.required' => 'Item adı alanı zorunludur.',
-            'name.string' => 'Item adı alanı metin tipinde olmalıdır.',
+            'file.required' => 'Lütfen bir dosya seçiniz.',
+            'file.mimes' => 'Dosya türü sadece xlsx ve xls olabilir.',
         ];
     }
 }

@@ -1,4 +1,5 @@
 <script src="{{asset('assets/bower_components/sweet-alert/sweetalert.min.js')}}"></script>
+<script src="{{asset('assets/bower_components/select2/dist/js/select2.min.js')}}"></script>
 <script>
     $('body').on('keypress', function (e) {
         var key = (e.keyCode || e.which);
@@ -6,7 +7,7 @@
             $('#saveItem').click();
         }
     });
-
+    $('.select2').select2();
 
     $('#saveItem').on('click', function () {
         var name = $('#name').val();
@@ -118,10 +119,6 @@
         });
     });
 
-    $('#clearFilter').on('click', function () {
-        $('#itemTable tbody tr').show();
-    });
-
     $('#selectAll').on('click', function () {
         if ($('#selectAll').data('selected') === 'true') {
             $('.itemCheckbox').prop('checked', false);
@@ -200,7 +197,7 @@
             processData: false,
             success: function (response) {
                 console.log(response);
-                //window.location.reload();
+                window.location.reload();
             },
             error: function (response) {
                 console.log(response);
@@ -210,24 +207,9 @@
                     errorHtml += '<li>' + value + '</li>';
                 });
                 errorHtml += '</ul></div>';
-                $('#error-container').html(errorHtml);
+                $('#error-container-import').html(errorHtml);
             }
         });
     });
 
-</script>
-
-<script>
-    function submitFormWithServerId(serverId) {
-        // Yeni bir input oluştur ve server_id olarak ayarla
-        let form = document.querySelector('form');
-        let serverInput = document.createElement('input');
-        serverInput.type = 'hidden';
-        serverInput.name = 'server_id';
-        serverInput.value = serverId;
-
-        // Formun içerisine yeni input'u ekle ve formu gönder
-        form.appendChild(serverInput);
-        form.submit();
-    }
 </script>

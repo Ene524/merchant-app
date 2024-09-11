@@ -14,12 +14,15 @@
             </div>
             <div class="modal-body">
 
-                <div id="error-container"></div>
+                <div id="error-container-import"></div>
 
 
                 <form class="form-horizontal"
                       method="POST">
                     <div class="box-body">
+
+                        <div id="error-container"></div>
+
 
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Item Adı</label>
