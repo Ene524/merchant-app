@@ -32,6 +32,7 @@ class ItemCreateOrUpdateRequest extends FormRequest
         return [
             'name.required' => 'Item adı alanı zorunludur.',
             'name.string' => 'Item adı alanı metin tipinde olmalıdır.',
+            'server_id.required' => 'Server seçimi zorunludur'
         ];
     }
 }
