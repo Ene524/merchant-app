@@ -36,39 +36,50 @@
                     </button>
 
                 </div>
-
-
                 <div class="box-body with-border">
-                    <div class="text-center">
+
+                    <div class="row">
                         <form action="{{ route('item.index') }}"
                               method="GET">
-                            <div class="row"
-                                 style="margin-bottom: 10px">
-                                <div class="col-md-2"
-                                     style="width: 70px">
+                            <div class="col-sm-1">
+                                <div class="dataTables_length"
+                                     id="example1_length">
+                                    <label for="name"
+                                           class="control-label"
+                                           style="visibility:hidden;">İsim
+                                    </label>
                                     <select name="per_page"
-                                            class="form-control"
-                                            style="width: 70px">
+                                            aria-controls="example1"
+                                            class="form-control">
                                         <option value="10">10</option>
                                         <option value="25">25</option>
                                         <option value="50">50</option>
                                         <option value="100">100</option>
                                     </select>
+
                                 </div>
-                                <div class="col-md-1">
-                                    <span>Kayıt Göster</span>
-                                </div>
-                                <div class="col-md-2">
-                                    <input class="form-control"
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="name"
+                                           class="control-label">İsim
+                                    </label>
+                                    <input id="name"
+                                           class="form-control"
                                            name="name"
                                            placeholder="İsim"
                                            value="{{ request('name') }}">
                                 </div>
-                                <div class="col-md-2">
-
-                                    <select class="form-control mr-2 select2"
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="name"
+                                           class="control-label">Server
+                                    </label>
+                                    <select id="server_id"
+                                            class="form-control select2"
                                             name="server_id">
-                                        <option value="{{null}}">Server Seçiniz</option>
+                                        <option value="">Server Seçiniz</option>
                                         @foreach($servers as $server)
                                             <option value="{{ $server->id }}" {{ request('server_id') == $server->id ? 'selected' : '' }}>
                                                 {{ $server->name }}
@@ -76,17 +87,33 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-2">
-                                    <button type="submit"
-                                            class="btn btn-info">Filtrele
-                                    </button>
-                                    <a href="{{route('item.index')}}"
-                                       class="btn btn-info">Filtreyi Temizle
-                                    </a>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="name"
+                                           class="control-label"
+                                           style="visibility:hidden;">
+                                        Filtreleme İşlemleri
+                                    </label>
+                                    <div class="btn-group btn-group-justified"
+                                         role="group">
+                                        <div class="btn-group"
+                                             role="group">
+                                            <button type="submit"
+                                                    class="btn btn-info">Filtrele
+                                            </button>
+                                        </div>
+                                        <div class="btn-group"
+                                             role="group">
+                                            <a href="{{ route('item.index') }}"
+                                               style="margin-left:10px"
+                                               class="btn btn-default">Filtreyi Temizle
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
-
 
                     </div>
 
@@ -145,10 +172,11 @@
                     {{$items->total()}}
                         </span>
                     <span class="pull-right">{{$items->appends($_GET)->onEachSide(2)->links()}}</span>
+
+
                 </div>
             </div>
         </div>
-    </div>
 
 @endsection
 

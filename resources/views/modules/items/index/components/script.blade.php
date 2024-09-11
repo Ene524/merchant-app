@@ -7,7 +7,9 @@
             $('#saveItem').click();
         }
     });
-    $('.select2').select2();
+    $('.select2').select2({
+        dropdownAutoWidth: true,
+    });
 
     $('#saveItem').on('click', function () {
         var name = $('#name').val();
