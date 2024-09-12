@@ -61,7 +61,8 @@
                                 <input class="form-control"
                                        type="number"
                                        name="price_with_vat"
-                                       id="price_with_vat"/>
+                                       id="price_with_vat"
+                                       disabled/>
                             </div>
                         </div>
 

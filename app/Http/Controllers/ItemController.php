@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GetById;
 use App\Http\Requests\ItemCreateFromExcel;
 use App\Http\Requests\ItemCreateOrUpdateRequest;
 use App\Http\Requests\ItemTransactionCreateorUpdateRequest;
@@ -18,7 +17,6 @@ class ItemController extends Controller
 {
     public function index(Request $request)
     {
-        //dd($request->all());
         $servers = Server::all();
 
         $items = Item::with('user', 'server')
@@ -70,8 +68,13 @@ class ItemController extends Controller
     public function itemTransactions($id)
     {
         $item = Item::find($id);
-        $itemTransactions = ItemTransaction::with('user')->where('item_id', $id)->get();
-        return view('modules.transactions.index.index', compact('item', 'itemTransactions'));
+        if (!$item) {
+            return redirect()->route('item.index')->with('error', 'Item bulunamadı.');
+        } else {
+            $item = Item::find($id);
+            $itemTransactions = ItemTransaction::with('user')->where('item_id', $id)->get();
+            return view('modules.transactions.index.index', compact('item', 'itemTransactions'));
+        }
     }
 
     public function transactionStore(ItemTransactionCreateorUpdateRequest $request)
