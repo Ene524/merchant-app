@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/items', [ItemController::class, 'index'])->name('item.index');
+    Route::get('/items2', [ItemController::class, 'index2'])->name('item.index2');
     Route::post('/createOrUpdate', [ItemController::class, 'store'])->name('item.store');
     Route::get('/edit', [ItemController::class, 'edit'])->name('item.edit');
     Route::delete('/delete', [ItemController::class, 'delete'])->name('item.delete');

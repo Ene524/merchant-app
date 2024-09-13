@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{route('item.index')}}"><i class="fa fa-file"></i>
+                <a href="{{route('item.index2')}}"><i class="fa fa-file"></i>
                     <span>Itemler</span>
                 </a>
             </li>

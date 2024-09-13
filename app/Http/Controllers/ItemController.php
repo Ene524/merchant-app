@@ -12,6 +12,7 @@ use App\Models\Server;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Yajra\DataTables\DataTables;
 
 class ItemController extends Controller
 {
@@ -26,6 +27,28 @@ class ItemController extends Controller
             ->orderBy('items.created_at', 'desc')
             ->paginate($request->per_page ?? 10);
         return view('modules.items.index.index', compact('items', 'servers'));
+    }
+
+    public function index2(Request $request)
+    {
+        $servers = Server::all();
+
+        if ($request->ajax()) {
+            $query = Item::withDetails();
+            return DataTables::of($query)
+                ->addColumn('action', function ($item) {
+                    return '<a class="btn btn-primary btn-xs" href="' . route('item.transactions', $item->id) . '">Hareketler</a> ' .
+                        '<a class="btn btn-warning btn-xs" onclick="getItem(' . $item->id . ')">Düzenle</a> ' .
+                        '<a class="btn btn-danger btn-xs" onclick="deleteItem(' . $item->id . ')">Sil</a>';
+                })
+                ->addColumn('created_at', function ($item) {
+                    return $item->created_at->format('d.m.Y');
+                })
+                ->rawColumns(['action', 'created_at'])
+                ->make(true);
+        }
+
+        return view('modules.items.index2.index', compact('servers'));
     }
 
     public function store(ItemCreateOrUpdateRequest $request)

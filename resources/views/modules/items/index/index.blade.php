@@ -121,7 +121,7 @@
                            id="itemTable">
                         <thead>
                         <tr class="border-bottom-primary">
-                            <th></th>
+                            <th>#</th>
                             <th style="width:11.1%">Item Adı</th>
                             <th style="width:11.1%">Eldeki Miktar</th>
                             <th style="width:11.1%">Son Alış Fiyatı</th>
