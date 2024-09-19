@@ -17,6 +17,7 @@ class ItemsImport implements ToCollection, WithHeadingRow
     {
 
         foreach ($collection as $row) {
+
             $server = Server::where('name', $row['server'])->first();
             Item::create([
                 'name' => $row['name'],

@@ -27,7 +27,6 @@
                             <th scope="col">#</th>
                             <th scope="col">Adı</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Parola</th>
                             <th scope="col">Admin</th>
                             <th scope="col">Durumu</th>
                             <th scope="col">İşlemler</th>
@@ -39,7 +38,6 @@
                                 <th>{{ $user->id }}</th>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->password }}</td>
                                 @if ($user->is_admin)
                                     <td>
                                         <span class="badge bg-blue"

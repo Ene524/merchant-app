@@ -24,9 +24,9 @@
                     <table class="table table-responsive table-striped">
                         <thead>
                         <tr class="border-bottom-primary">
-                            <th style="width:33.3%">#</th>
-                            <th style="width:33.3%">Adı</th>
-                            <th style="width:33.3%">İşlemler</th>
+                            <th style="width:10%">#</th>
+                            <th style="width:80%">Adı</th>
+                            <th style="width:10%">İşlemler</th>
                         </tr>
                         </thead>
                         <tbody>

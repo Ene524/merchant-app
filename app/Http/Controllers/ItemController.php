@@ -53,8 +53,6 @@ class ItemController extends Controller
 
     public function store(ItemCreateOrUpdateRequest $request)
     {
-
-
         if ($request->id) {
             $item = Item::find($request->id);
             $item->name = $request->name;

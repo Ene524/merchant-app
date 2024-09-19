@@ -60,18 +60,5 @@
 <script src="{{asset('assets/dist/js/demo.js')}}"></script>
 @yield('customScript')
 
-@if (session('success'))
-    <script>
-        alert("{{ session()->get('success') }}")
-    </script>
-@endif
-
-@if (session('error'))
-    <script>
-        alert("{{ session()->get('error') }}")
-    </script>
-@endif
-
-
 </body>
 </html>
