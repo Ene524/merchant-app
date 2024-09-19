@@ -12,7 +12,8 @@ class Item extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'description', 'note', 'user_id', 'server_id'];
+    protected $fillable = ['id',
+        'name', 'description', 'note', 'user_id', 'server_id'];
     public function transactions()
     {
         return $this->hasMany(ItemTransaction::class);
