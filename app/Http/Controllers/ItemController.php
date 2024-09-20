@@ -86,16 +86,29 @@ class ItemController extends Controller
         return response()->json(['success' => 'Item deleted successfully.']);
     }
 
-    public function itemTransactions($id)
+    public function itemTransactions(Request $request)
     {
-        $item = Item::find($id);
-        if (!$item) {
-            return redirect()->route('item.index')->with('error', 'Item bulunamadı.');
-        } else {
-            $item = Item::find($id);
-            $itemTransactions = ItemTransaction::with('user')->where('item_id', $id)->get();
-            return view('modules.transactions.index.index', compact('item', 'itemTransactions'));
+        $item = Item::find($request->id);
+        if ($request->ajax()) {
+            if (!$item) {
+                return redirect()->route('item.index')->with('error', 'Item bulunamadı.');
+            } else {
+                $itemTransactions = ItemTransaction::with('item.user', 'item', 'item.server')->where('item_id', $request->id)->get();
+                return DataTables::of($itemTransactions)
+                    ->addColumn('action', function ($item) {
+                        return '<a class="btn btn-warning btn-xs" onclick="getItemTransaction(' . $item->id . ')">Düzenle</a> ' .
+                            '<a class="btn btn-danger btn-xs" onclick="deleteItemTransaction(' . $item->id . ')">Sil</a>';
+                    })
+                    ->addColumn('created_at', function ($item) {
+                        return $item->created_at->format('d.m.Y');
+                    })
+                    ->rawColumns(['action', 'created_at'])
+                    ->make(true);
+            }
         }
+        return view('modules.transactions.index.index', compact('item'));
+
+
     }
 
     public function transactionStore(ItemTransactionCreateorUpdateRequest $request)

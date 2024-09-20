@@ -1,6 +1,7 @@
 <script src="{{asset('assets/bower_components/sweet-alert/sweetalert.min.js')}}"></script>
 <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.1.5/js/dataTables.bootstrap.js"></script>
+<script src="https://cdn.datatables.net/select/2.1.0/js/dataTables.select.js"></script>
 
 <script>
     $('body').on('keypress', function (e) {
@@ -10,19 +11,45 @@
         }
     });
 
-    $("#itemTransactionTable").DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "responsive": true,
-        "order": [[0, "desc"]],
-        "language": {
-            "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Turkish.json"
+    $("#item-transaction-table").DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('item.transactions', ['id' => $item->id]) }}', // id parametresi burada verilmiş
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json'
+        },
+        columns: [
+            {
+                orderable: false,
+                render: DataTable.render.select(),
+                targets: 0
+            },
+            {
+                data: 'type', name: 'type', render: function (data, type, row) {
+                    switch (data) {
+                        case 1:
+                            return 'Alış';
+                        case 2:
+                            return 'Satış';
+                        default:
+                            return 'Bilinmiyor';
+                    }
+                }
+
+            },
+            {data: 'quantity', name: 'quantity', searchable: false},
+            {data: 'price', name: 'price', defaultContent: '0.00', searchable: false},
+            {data: 'created_at', name: 'created_at'},
+            {data: 'item.user.name', name: 'item.user.name'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+        ],
+        select: {
+            style: 'multi',
+            selector:
+                'td:first-child'
         }
-    });
+    })
+    ;
 
     $('#saveItemTransaction').on('click', function () {
         var id = $('#id').val();

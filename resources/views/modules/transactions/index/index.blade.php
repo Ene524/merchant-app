@@ -26,10 +26,11 @@
                     </button>
                 </div>
                 <div class="box-body with-border">
-                    <table class="table table-responsive"
-                           id="itemTransactionTable">
+                    <table class="table table-responsive table-bordered"
+                           id="item-transaction-table">
                         <thead>
                         <tr class="border-bottom-primary">
+                            <th></th>
                             <th style="width:16.6%">Fiyat Tipi</th>
                             <th style="width:16.6%">Miktar</th>
                             <th style="width:16.6%">Fiyat</th>
@@ -39,25 +40,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($itemTransactions as $itemTransaction)
-                            <tr data-id="{{ $itemTransaction->id }}">
-
-                                <td>{{ $itemTransaction->type==1 ? 'Alış':'Satış' }}</td>
-                                <td>{{ $itemTransaction->quantity }}</td>
-                                <td>{{ $itemTransaction->price }}</td>
-                                <td>{{ $itemTransaction->created_at }}</td>
-                                <td>{{ $itemTransaction->user->name }}</td>
-                                <td>
-                                    <a class="btn btn-warning btn-xs"
-                                       onclick="getItemTransaction({{ $itemTransaction->id }})">Düzenle
-                                    </a>
-                                    <a class="btn btn-danger btn-xs"
-                                       onclick="deleteItemTransaction({{$itemTransaction->id}})">Sil
-                                    </a>
-
-                                </td>
-                            </tr>
-                        @endforeach
                     </table>
                     <span class="pull-right"></span>
                 </div>
